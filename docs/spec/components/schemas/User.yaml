@@ -1,0 +1,19 @@
+allOf:
+  - $ref: '#/components/schemas/UserKey'
+  - type: object
+    required:
+      - attributes
+    properties:
+      attributes:
+        type: object
+        required:
+          - name
+          - surname
+          - position
+        properties:
+          name:
+            type: string
+          surname:
+            type: string
+          position:
+            type: string

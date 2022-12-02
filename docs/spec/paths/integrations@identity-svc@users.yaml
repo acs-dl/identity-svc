@@ -1,0 +1,53 @@
+post:
+  tags:
+    - Users
+  summary: Add User
+  operationId: addUser
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              $ref: '#/components/schemas/User'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/User'
+    '400':
+      $ref: '#/components/errors/BadRequest'
+    '500':
+      $ref: '#/components/errors/InternalError'
+
+get:
+  tags:
+    - Users
+  summary: List Users
+  operationId: getUsersList
+  parameters:
+    - $ref: '#/components/parameters/pageLimitParam'
+    - $ref: '#/components/parameters/pageNumberParam'
+    - $ref: '#/components/parameters/PositionParam'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    '500':
+      $ref: '#/components/errors/InternalError'

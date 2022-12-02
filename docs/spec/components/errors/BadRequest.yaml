@@ -1,0 +1,12 @@
+description: Bad Request
+content:
+  application/vnd.api+json:
+    schema:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/BadRequest"
