@@ -41,4 +41,5 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.WriteHeader(http.StatusNoContent)
 }
