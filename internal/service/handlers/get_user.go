@@ -1,11 +1,12 @@
 package handlers
 
 import (
+	"net/http"
+
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"net/http"
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
@@ -16,7 +17,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := UsersQ(r).FilterById(request.UserId).Get()
+	user, err := UsersQ(r).GetById(request.UserId)
 	if err != nil {
 		Log(r).WithError(err).Error("failed to get users")
 		ape.RenderErr(w, problems.InternalError())

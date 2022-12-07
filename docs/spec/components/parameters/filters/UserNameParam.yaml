@@ -1,0 +1,6 @@
+name: 'filter[name]'
+in: query
+description: get users with specified name
+required: false
+schema:
+  type: string

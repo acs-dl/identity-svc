@@ -1,12 +1,13 @@
 package handlers
 
 import (
+	"net/http"
+
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"net/http"
 )
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +18,12 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	users, err := UsersQ(r).Page(request.OffsetPageParams).Select()
+	users, err := UsersQ(r).Select(data.UserSelector{
+		OffsetParams: &request.OffsetPageParams,
+		Name:         request.Name,
+		Surname:      request.Surname,
+		Position:     request.Position,
+	})
 	if err != nil {
 		Log(r).WithError(err).Error("failed to select users")
 		ape.RenderErr(w, problems.InternalError())

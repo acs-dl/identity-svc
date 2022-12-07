@@ -1,7 +1,6 @@
-package config
+package connector
 
 import (
-	"gitlab.com/distributed_lab/acs/identity-svc/connector"
 	"gitlab.com/distributed_lab/figure"
 	"gitlab.com/distributed_lab/kit/comfig"
 	"gitlab.com/distributed_lab/kit/kv"
@@ -10,7 +9,7 @@ import (
 
 type IdentityConfiger interface {
 	IdentityConfig() *IdentityConfig
-	IdentityConnector() connector.ConnectorI
+	IdentityConnector() ConnectorI
 }
 
 type IdentityConfig struct {
@@ -41,6 +40,6 @@ func (c *identityConfig) IdentityConfig() *IdentityConfig {
 	}).(*IdentityConfig)
 }
 
-func (c *identityConfig) IdentityConnector() connector.ConnectorI {
-	return connector.NewConnector(c.IdentityConfig().ServiceUrl)
+func (c *identityConfig) IdentityConnector() ConnectorI {
+	return NewConnector(c.IdentityConfig().ServiceUrl)
 }

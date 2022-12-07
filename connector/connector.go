@@ -4,13 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
-	"gitlab.com/distributed_lab/acs/identity-svc/resources"
-	"gitlab.com/distributed_lab/kit/pgdb"
-	"gitlab.com/distributed_lab/logan/v3/errors"
 	"net/http"
-	"strconv"
 	"time"
+
+	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
+	"gitlab.com/distributed_lab/acs/identity-svc/resources"
+	"gitlab.com/distributed_lab/logan/v3/errors"
+	"gitlab.com/distributed_lab/urlval"
 )
 
 type Connector struct {
@@ -27,7 +27,7 @@ func NewConnector(serviceUrl string) ConnectorI {
 	}
 }
 
-func (c *Connector) doRequest(method, url string, body interface{}, pagination *pgdb.OffsetPageParams) (*http.Response, error) {
+func (c *Connector) doRequest(method, url string, body interface{}) (*http.Response, error) {
 	postBody, err := json.Marshal(body)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to marshal")
@@ -36,14 +36,6 @@ func (c *Connector) doRequest(method, url string, body interface{}, pagination *
 	req, err := http.NewRequest(method, url, bytes.NewBuffer(postBody))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to make request")
-	}
-
-	if pagination != nil {
-		q := req.URL.Query()
-		q.Add("page[limit]", strconv.FormatUint(pagination.Limit, 10))
-		q.Add("page[order]", pagination.Order)
-		q.Add("page[number]", strconv.FormatUint(pagination.PageNumber, 10))
-		req.URL.RawQuery = q.Encode()
 	}
 
 	response, err := c.Client.Do(req)
@@ -60,12 +52,12 @@ func (c *Connector) doRequest(method, url string, body interface{}, pagination *
 }
 
 func (c *Connector) DoRequest(method, url string, body interface{}) error {
-	_, err := c.doRequest(method, url, body, nil)
+	_, err := c.doRequest(method, url, body)
 	return err
 }
 
-func (c *Connector) DoRequestWithDecode(method, url string, body, decodeModel interface{}, pagination *pgdb.OffsetPageParams) error {
-	response, err := c.doRequest(method, url, body, pagination)
+func (c *Connector) DoRequestWithDecode(method, url string, body, decodeModel interface{}) error {
+	response, err := c.doRequest(method, url, body)
 	if err != nil {
 		return err
 	}
@@ -83,14 +75,14 @@ func (c *Connector) CreateUser(user resources.User) (resources.UserResponse, err
 	}{Data: user}
 	model := resources.UserResponse{}
 
-	err := c.DoRequestWithDecode("POST", c.ServiceUrl+"/users", body, &model, nil)
+	err := c.DoRequestWithDecode("POST", c.ServiceUrl+"/users", body, &model)
 	return model, err
 }
 
 func (c *Connector) GetUser(userId int64) (resources.UserResponse, error) {
 	model := resources.UserResponse{}
 
-	err := c.DoRequestWithDecode("GET", fmt.Sprintf("%s/users/%d", c.ServiceUrl, userId), nil, &model, nil)
+	err := c.DoRequestWithDecode("GET", fmt.Sprintf("%s/users/%d", c.ServiceUrl, userId), nil, &model)
 	return model, err
 }
 
@@ -99,16 +91,28 @@ func (c *Connector) DeleteUser(userId int64) error {
 	return err
 }
 
-func (c *Connector) UpdateUser(request requests.UpdateUserRequest) (resources.UserResponse, error) {
-	model := resources.UserResponse{}
+func (c *Connector) UpdateUser(request models.UpdateUserParams) error {
+	req := resources.User{
+		Key: resources.NewKeyInt64(request.Id, resources.USER),
+		Attributes: resources.UserAttributes{
+			Name:     request.Name,
+			Position: request.Position,
+			Surname:  request.Surname,
+		},
+	}
 
-	err := c.DoRequestWithDecode("PATCH", fmt.Sprintf("%s/users/%d", c.ServiceUrl, request.UserID), request.Data, &model, nil)
-	return model, err
+	err := c.DoRequest("PATCH", fmt.Sprintf("%s/users/%d", c.ServiceUrl, request.Id), req)
+	return err
 }
 
-func (c *Connector) GetUsers(params pgdb.OffsetPageParams) (resources.UserListResponse, error) {
+func (c *Connector) GetUsers(params models.GetUsersRequest) (resources.UserListResponse, error) {
 	model := resources.UserListResponse{}
 
-	err := c.DoRequestWithDecode("GET", c.ServiceUrl+"/users", nil, &model, &params)
+	err := c.DoRequestWithDecode(
+		"GET",
+		fmt.Sprintf("%s/users?%s", c.ServiceUrl, urlval.MustEncode(params)),
+		nil,
+		&model,
+	)
 	return model, err
 }

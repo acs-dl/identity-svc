@@ -2,13 +2,20 @@ package postgres
 
 import (
 	"database/sql"
+
 	sq "github.com/Masterminds/squirrel"
 	"github.com/fatih/structs"
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
 	"gitlab.com/distributed_lab/kit/pgdb"
 )
 
-const usersTable = "action"
+const (
+	usersTable     = "users"
+	idColumn       = "id"
+	nameColumn     = "name"
+	surnameColumn  = "surname"
+	positionColumn = "position"
+)
 
 var selectUsersTable = sq.Select("*").From(usersTable)
 
@@ -39,17 +46,38 @@ func (q *usersQ) Create(user data.User) (int64, error) {
 	return id, err
 }
 
-func (q *usersQ) Select() ([]data.User, error) {
+func (q *usersQ) Select(selector data.UserSelector) ([]data.User, error) {
+	return q.selectByQuery(applyUserSelector(q.sql, selector))
+}
+
+func (q *usersQ) selectByQuery(query sq.Sqlizer) ([]data.User, error) {
 	var result []data.User
-	err := q.db.Select(&result, q.sql)
+	err := q.db.Select(&result, query)
 
 	return result, err
 }
 
-func (q *usersQ) Get() (*data.User, error) {
+func applyUserSelector(sql sq.SelectBuilder, selector data.UserSelector) sq.SelectBuilder {
+	if selector.Name != nil {
+		sql = sql.Where(sq.ILike{nameColumn: "%" + *selector.Name + "%"})
+	}
+	if selector.Surname != nil {
+		sql = sql.Where(sq.ILike{surnameColumn: "%" + *selector.Surname + "%"})
+	}
+	if selector.Position != nil {
+		sql = sql.Where(sq.ILike{positionColumn: "%" + *selector.Position + "%"})
+	}
+	if selector.OffsetParams != nil {
+		sql = selector.OffsetParams.ApplyTo(sql, idColumn)
+	}
+
+	return sql
+}
+
+func (q *usersQ) GetById(id int64) (*data.User, error) {
 	var result data.User
 
-	err := q.db.Get(&result, q.sql)
+	err := q.db.Get(&result, q.sql.Where(sq.Eq{idColumn: id}))
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
@@ -71,24 +99,4 @@ func (q *usersQ) Update(user data.User) error {
 	err := q.db.Exec(stmt)
 
 	return err
-}
-
-func (q *usersQ) FilterById(id int64) data.UsersQ {
-	q.sql = q.sql.Where(sq.Eq{"id": id})
-	return q
-}
-
-func (q *usersQ) FilterByName(name string) data.UsersQ {
-	q.sql = q.sql.Where(sq.ILike{"name": "%" + name + "%"})
-	return q
-}
-
-func (q *usersQ) FilterBySurname(surname string) data.UsersQ {
-	q.sql = q.sql.Where(sq.ILike{"surname": "%" + surname + "%"})
-	return q
-}
-
-func (q *usersQ) Page(pageParams pgdb.OffsetPageParams) data.UsersQ {
-	q.sql = pageParams.ApplyTo(q.sql, "id")
-	return q
 }

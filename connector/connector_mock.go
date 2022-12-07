@@ -1,9 +1,8 @@
 package connector
 
 import (
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
+	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
-	"gitlab.com/distributed_lab/kit/pgdb"
 )
 
 type ConnectorMockIdentity struct {
@@ -28,10 +27,10 @@ func (c *ConnectorMockIdentity) DeleteUser(userId int64) error {
 	return nil
 }
 
-func (c *ConnectorMockIdentity) UpdateUser(request requests.UpdateUserRequest) (resources.UserResponse, error) {
-	return resources.UserResponse{}, nil
+func (c *ConnectorMockIdentity) UpdateUser(request models.UpdateUserParams) error {
+	return nil
 }
 
-func (c *ConnectorMockIdentity) GetUsers(params pgdb.OffsetPageParams) (resources.UserListResponse, error) {
+func (c *ConnectorMockIdentity) GetUsers(params models.GetUsersRequest) (resources.UserListResponse, error) {
 	return resources.UserListResponse{}, nil
 }

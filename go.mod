@@ -1,6 +1,6 @@
 module gitlab.com/distributed_lab/acs/identity-svc
 
-go 1.19
+go 1.18
 
 require (
 	github.com/Masterminds/squirrel v1.4.0
@@ -10,8 +10,10 @@ require (
 	github.com/rubenv/sql-migrate v1.2.0
 	github.com/spf13/cast v1.3.1
 	gitlab.com/distributed_lab/ape v1.7.1
+	gitlab.com/distributed_lab/figure v2.1.0+incompatible
 	gitlab.com/distributed_lab/kit v1.11.1
 	gitlab.com/distributed_lab/logan v3.8.1+incompatible
+	gitlab.com/distributed_lab/urlval v3.0.0+incompatible
 )
 
 require (
@@ -40,7 +42,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.8.1 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
-	gitlab.com/distributed_lab/figure v2.1.0+incompatible // indirect
 	gitlab.com/distributed_lab/lorem v0.2.0 // indirect
 	gitlab.com/distributed_lab/running v0.0.0-20200706131153-4af0e83eb96c // indirect
 	golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e // indirect

@@ -137,6 +137,11 @@ gitlab.com/distributed_lab/lorem
 # gitlab.com/distributed_lab/running v0.0.0-20200706131153-4af0e83eb96c
 ## explicit
 gitlab.com/distributed_lab/running
+# gitlab.com/distributed_lab/urlval v3.0.0+incompatible
+## explicit
+gitlab.com/distributed_lab/urlval
+gitlab.com/distributed_lab/urlval/internal
+gitlab.com/distributed_lab/urlval/internal/betterreflect
 # golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e
 ## explicit; go 1.17
 golang.org/x/sys/internal/unsafeheader

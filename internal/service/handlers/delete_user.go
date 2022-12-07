@@ -1,10 +1,11 @@
 package handlers
 
 import (
+	"net/http"
+
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"net/http"
 )
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
@@ -15,7 +16,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user, err := UsersQ(r).FilterById(request.UserId).Get()
+	user, err := UsersQ(r).GetById(request.UserId)
 	if err != nil {
 		Log(r).WithError(err).Error("failed to get users")
 		ape.RenderErr(w, problems.InternalError())
@@ -28,8 +29,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = UsersQ(r).Delete(request.UserId)
-	if err != nil {
+	if err = UsersQ(r).Delete(request.UserId); err != nil {
 		Log(r).WithError(err).Error("failed to delete user")
 		ape.RenderErr(w, problems.InternalError())
 		return
