@@ -92,16 +92,18 @@ func (c *Connector) DeleteUser(userId int64) error {
 }
 
 func (c *Connector) UpdateUser(request models.UpdateUserParams) error {
-	req := resources.User{
+	body := struct {
+		Data resources.User
+	}{Data: resources.User{
 		Key: resources.NewKeyInt64(request.Id, resources.USER),
 		Attributes: resources.UserAttributes{
 			Name:     request.Name,
 			Position: request.Position,
 			Surname:  request.Surname,
 		},
-	}
+	}}
 
-	err := c.DoRequest("PATCH", fmt.Sprintf("%s/users/%d", c.ServiceUrl, request.Id), req)
+	err := c.DoRequest("PATCH", fmt.Sprintf("%s/users/%d", c.ServiceUrl, request.Id), body)
 	return err
 }
 
