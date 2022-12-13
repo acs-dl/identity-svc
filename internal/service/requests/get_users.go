@@ -1,11 +1,11 @@
 package requests
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/distributed_lab/logan/v3/errors"
+	"gitlab.com/distributed_lab/urlval"
 )
 
 type GetUsersRequest struct {
@@ -19,7 +19,7 @@ type GetUsersRequest struct {
 func NewGetUsersRequest(r *http.Request) (GetUsersRequest, error) {
 	request := GetUsersRequest{}
 
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+	if err := urlval.Decode(r.URL.Query(), &request); err != nil {
 		return request, errors.Wrap(err, "failed to decode request")
 	}
 

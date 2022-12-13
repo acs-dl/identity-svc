@@ -2,11 +2,12 @@ package requests
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/go-chi/chi"
 	"github.com/spf13/cast"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 	"gitlab.com/distributed_lab/logan/v3/errors"
-	"net/http"
 )
 
 type UpdateUserRequest struct {
@@ -23,6 +24,6 @@ func NewUpdateUserRequest(r *http.Request) (UpdateUserRequest, error) {
 		return request, errors.Wrap(err, "failed to decode request")
 	}
 
-	return request, nil
+	return request, validate(request.Data)
 
 }

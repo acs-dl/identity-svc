@@ -1,9 +1,7 @@
 package requests
 
 import (
-	"gitlab.com/distributed_lab/logan/v3/errors"
 	"net/http"
-	"strconv"
 )
 
 type DeleteUserRequest struct {
@@ -12,16 +10,13 @@ type DeleteUserRequest struct {
 
 func NewDeleteUserRequest(r *http.Request) (DeleteUserRequest, error) {
 	request := DeleteUserRequest{}
-	userId := r.URL.Query().Get("id")
-	if userId == "" {
-		return DeleteUserRequest{}, errors.New("failed to get user id")
+
+	userId, err := RetrieveId(r)
+	if err != nil {
+		return request, err
 	}
 
-	var err error
-	request.UserId, err = strconv.ParseInt(userId, 10, 64)
-	if err != nil {
-		return DeleteUserRequest{}, err
-	}
+	request.UserId = userId
 
 	return request, nil
 }

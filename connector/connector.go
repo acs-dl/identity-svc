@@ -43,7 +43,7 @@ func (c *Connector) doRequest(method, url string, body interface{}) (*http.Respo
 		return nil, errors.Wrap(err, "failed to send request")
 	}
 
-	if response.StatusCode < 200 && response.StatusCode >= 300 {
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		response.Body.Close()
 		return response, errors.New("Bad status")
 	}
@@ -87,7 +87,7 @@ func (c *Connector) GetUser(userId int64) (resources.UserResponse, error) {
 }
 
 func (c *Connector) DeleteUser(userId int64) error {
-	err := c.DoRequest("POST", fmt.Sprintf("%s/users/%d", c.ServiceUrl, userId), nil)
+	err := c.DoRequest("DELETE", fmt.Sprintf("%s/users/%d", c.ServiceUrl, userId), nil)
 	return err
 }
 
