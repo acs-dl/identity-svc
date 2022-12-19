@@ -12,4 +12,6 @@ type ConnectorI interface {
 	DeleteUser(userId int64) error
 	UpdateUser(request models.UpdateUserParams) error
 	GetUsers(params models.GetUsersRequest) (handlers.UserListResponse, error)
+
+	GetPositions() (resources.PositionsResponse, error)
 }

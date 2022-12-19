@@ -16,6 +16,10 @@ func NewConnectorMockIdentity(serviceUrl string) ConnectorI {
 	}
 }
 
+func (c *ConnectorMockIdentity) GetPositions() (resources.PositionsResponse, error) {
+	return resources.PositionsResponse{}, nil
+}
+
 func (c *ConnectorMockIdentity) CreateUser(user resources.User) (resources.UserResponse, error) {
 	return resources.UserResponse{}, nil
 }

@@ -120,3 +120,16 @@ func (c *Connector) GetUsers(params models.GetUsersRequest) (handlers.UserListRe
 	)
 	return model, err
 }
+
+func (c *Connector) GetPositions() (resources.PositionsResponse, error) {
+	model := resources.PositionsResponse{}
+
+	err := c.DoRequestWithDecode(
+		http.MethodGet,
+		fmt.Sprintf("%s/users/positions", c.ServiceUrl),
+		nil,
+		&model,
+	)
+
+	return model, err
+}
