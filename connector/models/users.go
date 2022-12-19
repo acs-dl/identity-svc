@@ -2,13 +2,15 @@ package models
 
 import (
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
-	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 )
 
 type (
 	UpdateUserParams struct {
-		Id int64 `json:"id"`
-		resources.UserAttributes
+		Id       int64  `json:"id"`
+		Email    string `json:"email"`
+		Name     string `json:"name"`
+		Position string `json:"position"`
+		Surname  string `json:"surname"`
 	}
 
 	GetUsersRequest requests.GetUsersRequest
