@@ -15,6 +15,7 @@ const (
 	nameColumn     = "name"
 	surnameColumn  = "surname"
 	positionColumn = "position"
+	emailColumn    = "email"
 )
 
 var selectUsersTable = sq.Select("*").From(usersTable)
@@ -29,6 +30,15 @@ func NewUsersQ(db *pgdb.DB) data.UsersQ {
 		db:  db.Clone(),
 		sql: selectUsersTable,
 	}
+}
+
+func (q *usersQ) GetTotalCount() (int64, error) {
+	stmt := sq.Select("COUNT (*)").From(usersTable)
+
+	var count int64
+	err := q.db.Get(&count, stmt)
+
+	return count, err
 }
 
 func (q *usersQ) New() data.UsersQ {
@@ -69,6 +79,9 @@ func applyUserSelector(sql sq.SelectBuilder, selector data.UserSelector) sq.Sele
 	}
 	if selector.OffsetParams != nil {
 		sql = selector.OffsetParams.ApplyTo(sql, idColumn)
+	}
+	if selector.Email != nil {
+		sql = sql.Where(sq.ILike{emailColumn: "%" + *selector.Email + "%"})
 	}
 
 	return sql

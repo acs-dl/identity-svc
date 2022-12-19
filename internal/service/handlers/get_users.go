@@ -23,6 +23,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		Name:         request.Name,
 		Surname:      request.Surname,
 		Position:     request.Position,
+		Email:        request.Email,
 	})
 	if err != nil {
 		Log(r).WithError(err).Error("failed to select users")
@@ -30,14 +31,24 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := newUserListResponse(users)
+	totalCount, err := UsersQ(r).GetTotalCount()
+	if err != nil {
+		Log(r).WithError(err).Error("failed to select total count")
+		ape.RenderErr(w, problems.InternalError())
+		return
+	}
+
+	response := newUserListResponse(users, totalCount)
 	response.Links = data.GetOffsetLinksForPGParams(r, request.OffsetPageParams)
 
 	ape.Render(w, response)
 }
 
-func newUserListResponse(users []data.User) resources.UserListResponse {
-	response := resources.UserListResponse{
+func newUserListResponse(users []data.User, totalCount int64) UserListResponse {
+	var response = UserListResponse{
+		Meta: Meta{
+			TotalCount: totalCount,
+		},
 		Data: make([]resources.User, len(users)),
 	}
 
@@ -55,6 +66,17 @@ func newUserResource(user data.User) resources.User {
 			Name:     user.Name,
 			Position: user.Position,
 			Surname:  user.Surname,
+			Email:    user.Email,
 		},
 	}
+}
+
+type UserListResponse struct {
+	Meta  Meta             `json:"meta"`
+	Data  []resources.User `json:"data"`
+	Links *resources.Links `json:"links"`
+}
+
+type Meta struct {
+	TotalCount int64 `json:"total_count"`
 }

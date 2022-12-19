@@ -2,6 +2,7 @@ package connector
 
 import (
 	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/handlers"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 )
 
@@ -31,6 +32,6 @@ func (c *ConnectorMockIdentity) UpdateUser(request models.UpdateUserParams) erro
 	return nil
 }
 
-func (c *ConnectorMockIdentity) GetUsers(params models.GetUsersRequest) (resources.UserListResponse, error) {
-	return resources.UserListResponse{}, nil
+func (c *ConnectorMockIdentity) GetUsers(params models.GetUsersRequest) (handlers.UserListResponse, error) {
+	return handlers.UserListResponse{}, nil
 }

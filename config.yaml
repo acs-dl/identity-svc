@@ -7,6 +7,17 @@ db:
 listener:
   addr: :8000
 
+positions:
+  list:
+    - Back-end
+    - Front-end
+    - Manager
+    - DevOps
+    - QA
+    - Solidity
+    - Designer
+    - other
+
 cop:
   disabled: true
   endpoint: "http://..."

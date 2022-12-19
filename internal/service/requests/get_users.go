@@ -14,6 +14,7 @@ type GetUsersRequest struct {
 	Name     *string `filter:"name"`
 	Surname  *string `filter:"surname"`
 	Position *string `filter:"position"`
+	Email    *string `filter:"email"`
 }
 
 func NewGetUsersRequest(r *http.Request) (GetUsersRequest, error) {

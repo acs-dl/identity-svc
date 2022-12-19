@@ -8,5 +8,6 @@ type ResourceType string
 
 // List of ResourceType
 const (
-	USER ResourceType = "user"
+	POSITIONS ResourceType = "positions"
+	USER      ResourceType = "user"
 )

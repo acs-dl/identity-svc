@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/handlers"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/distributed_lab/urlval"
@@ -100,6 +101,7 @@ func (c *Connector) UpdateUser(request models.UpdateUserParams) error {
 			Name:     request.Name,
 			Position: request.Position,
 			Surname:  request.Surname,
+			Email:    request.Email,
 		},
 	}}
 
@@ -107,8 +109,8 @@ func (c *Connector) UpdateUser(request models.UpdateUserParams) error {
 	return err
 }
 
-func (c *Connector) GetUsers(params models.GetUsersRequest) (resources.UserListResponse, error) {
-	model := resources.UserListResponse{}
+func (c *Connector) GetUsers(params models.GetUsersRequest) (handlers.UserListResponse, error) {
+	model := handlers.UserListResponse{}
 
 	err := c.DoRequestWithDecode(
 		"GET",

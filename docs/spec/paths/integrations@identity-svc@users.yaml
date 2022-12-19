@@ -51,5 +51,12 @@ get:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+              meta:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                    format: int64
+                    description: Total number of users
     '500':
       $ref: '#/components/errors/InternalError'

@@ -16,6 +16,7 @@ func (s *service) router() chi.Router {
 		ape.CtxMiddleware(
 			handlers.CtxLog(s.log),
 			handlers.CtxUsersQ(postgres.NewUsersQ(s.config.DB())),
+			handlers.CtxPositions(s.config.Positions()),
 		),
 	)
 	r.Route("/integrations/identity-svc", func(r chi.Router) {
@@ -25,6 +26,8 @@ func (s *service) router() chi.Router {
 			r.Delete("/{id}", handlers.DeleteUser)
 			r.Post("/", handlers.CreateUser)
 			r.Patch("/{id}", handlers.UpdateUser)
+
+			r.Get("/positions", handlers.GetPositions)
 		})
 	})
 

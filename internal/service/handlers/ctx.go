@@ -2,8 +2,9 @@ package handlers
 
 import (
 	"context"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
 	"net/http"
+
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
 
 	"gitlab.com/distributed_lab/logan/v3"
 )
@@ -13,6 +14,7 @@ type ctxKey int
 const (
 	logCtxKey ctxKey = iota
 	usersCtxKey
+	positionsCtxKey
 )
 
 func CtxLog(entry *logan.Entry) func(context.Context) context.Context {
@@ -33,4 +35,14 @@ func CtxUsersQ(entry data.UsersQ) func(context.Context) context.Context {
 	return func(ctx context.Context) context.Context {
 		return context.WithValue(ctx, usersCtxKey, entry)
 	}
+}
+
+func CtxPositions(entry []string) func(ctx context.Context) context.Context {
+	return func(ctx context.Context) context.Context {
+		return context.WithValue(ctx, positionsCtxKey, entry)
+	}
+}
+
+func Positions(r *http.Request) []string {
+	return r.Context().Value(positionsCtxKey).([]string)
 }

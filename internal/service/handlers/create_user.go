@@ -1,12 +1,13 @@
 package handlers
 
 import (
+	"net/http"
+
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"net/http"
 )
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -21,6 +22,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		Name:     request.Attributes.Name,
 		Surname:  request.Attributes.Surname,
 		Position: request.Attributes.Position,
+		Email:    request.Attributes.Email,
 	})
 	if err != nil {
 		Log(r).WithError(err).Error("failed to create user")

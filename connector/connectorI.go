@@ -2,6 +2,7 @@ package connector
 
 import (
 	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/handlers"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 )
 
@@ -10,5 +11,5 @@ type ConnectorI interface {
 	GetUser(userId int64) (resources.UserResponse, error)
 	DeleteUser(userId int64) error
 	UpdateUser(request models.UpdateUserParams) error
-	GetUsers(params models.GetUsersRequest) (resources.UserListResponse, error)
+	GetUsers(params models.GetUsersRequest) (handlers.UserListResponse, error)
 }
