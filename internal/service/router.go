@@ -22,10 +22,13 @@ func (s *service) router() chi.Router {
 	r.Route("/integrations/identity-svc", func(r chi.Router) {
 		r.Route("/users", func(r chi.Router) {
 			r.Get("/", handlers.GetUsers)
+			r.Post("/", handlers.CreateUser)
+
 			r.Get("/{id}", handlers.GetUser)
 			r.Delete("/{id}", handlers.DeleteUser)
-			r.Post("/", handlers.CreateUser)
 			r.Patch("/{id}", handlers.UpdateUser)
+
+			r.Get("/search", handlers.SearchUsers)
 
 			r.Get("/positions", handlers.GetPositions)
 		})

@@ -2,6 +2,8 @@ package postgres
 
 import (
 	"database/sql"
+	"fmt"
+	"strings"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/fatih/structs"
@@ -62,6 +64,7 @@ func (q *usersQ) Select(selector data.UserSelector) ([]data.User, error) {
 
 func (q *usersQ) selectByQuery(query sq.Sqlizer) ([]data.User, error) {
 	var result []data.User
+
 	err := q.db.Select(&result, query)
 
 	return result, err
@@ -112,4 +115,18 @@ func (q *usersQ) Update(user data.User) error {
 	err := q.db.Exec(stmt)
 
 	return err
+}
+
+func (q *usersQ) SearchBy(search string) data.UsersQ {
+	search = strings.Replace(search, " ", "%", -1)
+	search = fmt.Sprint("%", search, "%")
+
+	q.sql = q.sql.Where(
+		sq.Or{
+			sq.ILike{nameColumn: search},
+			sq.ILike{surnameColumn: search},
+			sq.ILike{surnameColumn + " || " + nameColumn: search},
+			sq.ILike{nameColumn + " || " + surnameColumn: search},
+		})
+	return q
 }

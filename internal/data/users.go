@@ -9,6 +9,7 @@ type UsersQ interface {
 	Delete(id int64) error
 	Update(user User) error
 	GetById(id int64) (*User, error)
+	SearchBy(search string) UsersQ
 
 	GetTotalCount() (int64, error)
 

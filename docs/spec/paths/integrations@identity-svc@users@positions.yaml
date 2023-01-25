@@ -14,4 +14,4 @@ get:
               data:
                 $ref: '#/components/schemas/Positions'
     '500':
-      $ref: '#/components/errors/InternalError'
+      $ref: '#/components/responses/InternalError'

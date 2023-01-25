@@ -2,7 +2,7 @@ log:
   disable_sentry: true
 
 db:
-  url: db_url
+  url: postgres://identity:identity@localhost:5432/identity?sslmode=disable
 
 listener:
   addr: :8000

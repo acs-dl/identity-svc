@@ -1,0 +1,30 @@
+type: object
+required:
+  - title
+  - status
+  - code
+properties:
+  title:
+    type: string
+    description: "Short, human-readable summary of the problem"
+    example: "Bad Request"
+  detail:
+    type: string
+    description: "Human-readable explanation specific to this occurrence of the problem"
+    example: "Your request was invalid in some way."
+  status:
+    type: integer
+    description: "HTTP status code applicable to this problem"
+    enum:
+      - 400
+  code:
+    type: string
+    description: "Application-specific error code, expressed as a string value"
+    enum:
+      - "bad_request"
+  meta:
+    type: object
+    description: "Object containing non-standard meta-information about the error"
+    example:
+      error: "failed to verify issuer: failed to create a request: invalid url"
+      error_info: "Issuer check failed."

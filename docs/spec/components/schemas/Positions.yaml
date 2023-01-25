@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '#/components/schemas/PositionKey'
+  - $ref: '#/components/schemas/PositionsKey'
   - type: object
     required:
       - attributes

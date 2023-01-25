@@ -24,9 +24,9 @@ post:
                 type: object
                 $ref: '#/components/schemas/User'
     '400':
-      $ref: '#/components/errors/BadRequest'
+      $ref: '#/components/responses/BadRequest'
     '500':
-      $ref: '#/components/errors/InternalError'
+      $ref: '#/components/responses/InternalError'
 
 get:
   tags:
@@ -59,4 +59,4 @@ get:
                     format: int64
                     description: Total number of users
     '500':
-      $ref: '#/components/errors/InternalError'
+      $ref: '#/components/responses/InternalError'

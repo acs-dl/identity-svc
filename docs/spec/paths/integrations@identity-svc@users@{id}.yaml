@@ -27,11 +27,11 @@ get:
                 items:
                   type: object
     '400':
-      $ref: '#/components/errors/BadRequest'
+      $ref: '#/components/responses/BadRequest'
     '404':
-      $ref: '#/components/errors/NotFound'
+      $ref: '#/components/responses/NotFound'
     '500':
-      $ref: '#/components/errors/InternalError'
+      $ref: '#/components/responses/InternalError'
 
 delete:
   tags:
@@ -42,11 +42,11 @@ delete:
     '204':
       description: Success
     '400':
-      $ref: '#/components/errors/BadRequest'
+      $ref: '#/components/responses/BadRequest'
     '404':
-      $ref: '#/components/errors/NotFound'
+      $ref: '#/components/responses/NotFound'
     '500':
-      $ref: '#/components/errors/InternalError'
+      $ref: '#/components/responses/InternalError'
 
 patch:
   tags:
@@ -61,13 +61,13 @@ patch:
           properties:
             data:
               type: object
-              $ref: '#/components/schemas/UpdateUser'
+              $ref: '#/components/schemas/User'
   responses:
     '204':
       description: Success
     '400':
-      $ref: '#/components/errors/BadRequest'
+      $ref: '#/components/responses/BadRequest'
     '404':
-      $ref: '#/components/errors/NotFound'
+      $ref: '#/components/responses/NotFound'
     '500':
-      $ref: '#/components/errors/InternalError'
+      $ref: '#/components/responses/InternalError'
