@@ -1,0 +1,9 @@
+in: query
+name: 'filter[username]'
+required: true
+schema:
+  type: string
+  description: >-
+    Filter by user's name and/or surname from identity. If search param is not specified, list with all 
+    users are returned.
+  example: "Maksym"
