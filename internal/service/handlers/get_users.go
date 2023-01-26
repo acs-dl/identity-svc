@@ -24,6 +24,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		Surname:      request.Surname,
 		Position:     request.Position,
 		Email:        request.Email,
+		Search:       request.Search,
 	})
 	if err != nil {
 		Log(r).WithError(err).Error("failed to select users")
@@ -31,14 +32,20 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	totalCount, err := UsersQ(r).GetTotalCount()
+	totalCount, err := UsersQ(r).Select(data.UserSelector{
+		Name:     request.Name,
+		Surname:  request.Surname,
+		Position: request.Position,
+		Email:    request.Email,
+		Search:   request.Search,
+	})
 	if err != nil {
 		Log(r).WithError(err).Error("failed to select total count")
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
 
-	response := newUserListResponse(users, totalCount)
+	response := newUserListResponse(users, int64(len(totalCount)))
 	response.Links = data.GetOffsetLinksForPGParams(r, request.OffsetPageParams)
 
 	ape.Render(w, response)

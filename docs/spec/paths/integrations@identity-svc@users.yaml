@@ -39,6 +39,7 @@ get:
     - $ref: '#/components/parameters/UserNameParam'
     - $ref: '#/components/parameters/UserSurnameParam'
     - $ref: '#/components/parameters/UserPositionParam'
+    - $ref: '#/components/parameters/searchParam'
   responses:
     '200':
       description: Success

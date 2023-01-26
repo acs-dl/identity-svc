@@ -86,6 +86,18 @@ func applyUserSelector(sql sq.SelectBuilder, selector data.UserSelector) sq.Sele
 	if selector.Email != nil {
 		sql = sql.Where(sq.ILike{emailColumn: "%" + *selector.Email + "%"})
 	}
+	if selector.Search != nil {
+		searchModified := strings.Replace(*selector.Search, " ", "%", -1)
+		searchModified = fmt.Sprint("%", searchModified, "%")
+
+		sql = sql.Where(
+			sq.Or{
+				sq.ILike{nameColumn: searchModified},
+				sq.ILike{surnameColumn: searchModified},
+				sq.ILike{surnameColumn + " || " + nameColumn: searchModified},
+				sq.ILike{nameColumn + " || " + surnameColumn: searchModified},
+			})
+	}
 
 	return sql
 }
@@ -115,18 +127,4 @@ func (q *usersQ) Update(user data.User) error {
 	err := q.db.Exec(stmt)
 
 	return err
-}
-
-func (q *usersQ) SearchBy(search string) data.UsersQ {
-	search = strings.Replace(search, " ", "%", -1)
-	search = fmt.Sprint("%", search, "%")
-
-	q.sql = q.sql.Where(
-		sq.Or{
-			sq.ILike{nameColumn: search},
-			sq.ILike{surnameColumn: search},
-			sq.ILike{surnameColumn + " || " + nameColumn: search},
-			sq.ILike{nameColumn + " || " + surnameColumn: search},
-		})
-	return q
 }

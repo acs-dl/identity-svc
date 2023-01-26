@@ -28,8 +28,6 @@ func (s *service) router() chi.Router {
 			r.Delete("/{id}", handlers.DeleteUser)
 			r.Patch("/{id}", handlers.UpdateUser)
 
-			r.Get("/search", handlers.SearchUsers)
-
 			r.Get("/positions", handlers.GetPositions)
 		})
 	})
