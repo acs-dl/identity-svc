@@ -15,6 +15,7 @@ type Config interface {
 	comfig.Listenerer
 
 	Positions() []string
+	JwtParams() *JwtCfg
 }
 
 type config struct {
@@ -25,6 +26,7 @@ type config struct {
 	getter kv.Getter
 
 	positionsOnce comfig.Once
+	jwtCfg        comfig.Once
 }
 
 func New(getter kv.Getter) Config {
