@@ -1,0 +1,24 @@
+type: object
+required:
+  - title
+  - status
+  - code
+properties:
+  title:
+    type: string
+    description: "Short, human-readable summary of the problem"
+    example: "Internal Error"
+  detail:
+    type: string
+    description: "Human-readable explanation specific to this occurrence of the problem"
+    example: "Some internal error occurred. Please report this error to service maintainers."
+  status:
+    type: integer
+    description: "HTTP status code applicable to this problem"
+    enum:
+      - 500
+  code:
+    type: string
+    description: "Application-specific error code, expressed as a string value"
+    enum:
+      - "internal_error"

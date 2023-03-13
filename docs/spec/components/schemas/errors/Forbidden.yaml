@@ -1,0 +1,24 @@
+type: object
+required:
+  - title
+  - status
+  - code
+properties:
+  title:
+    type: string
+    description: "Short, human-readable summary of the problem"
+    example: "Forbidden"
+  detail:
+    type: string
+    description: "Human-readable explanation specific to this occurrence of the problem"
+    example: "The requester lacks necessary permissions to perform the request or action."
+  status:
+    type: integer
+    description: "HTTP status code applicable to this problem"
+    enum:
+      - 403
+  code:
+    type: string
+    description: "Application-specific error code, expressed as a string value"
+    enum:
+      - "forbidden"

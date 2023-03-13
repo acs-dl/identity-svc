@@ -1,0 +1,6 @@
+name: 'filter[position]'
+in: query
+description: get users with specified position
+required: false
+schema:
+  type: string

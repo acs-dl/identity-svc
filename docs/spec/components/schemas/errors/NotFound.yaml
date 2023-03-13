@@ -1,0 +1,24 @@
+type: object
+required:
+  - title
+  - status
+  - code
+properties:
+  title:
+    type: string
+    description: "Short, human-readable summary of the problem"
+    example: "Not Found"
+  detail:
+    type: string
+    description: "Human-readable explanation specific to this occurrence of the problem"
+    example: "The requested resource could not be found."
+  status:
+    type: integer
+    description: "HTTP status code applicable to this problem"
+    enum:
+      - 404
+  code:
+    type: string
+    description: "Application-specific error code, expressed as a string value"
+    enum:
+      - "not_found"

@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "identity"
+      POSTGRES_USER: "identity"
+      POSTGRES_PASSWORD: "identity"
+    ports:
+      - '5432:5432'

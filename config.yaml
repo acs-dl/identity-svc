@@ -1,0 +1,31 @@
+log:
+  disable_sentry: true
+
+db:
+  url: postgres://identity:identity@localhost:5432/identity?sslmode=disable
+
+listener:
+  addr: :8000
+
+positions:
+  list:
+    - Back-end
+    - Front-end
+    - Manager
+    - DevOps
+    - QA
+    - Solidity
+    - Designer
+    - other
+
+jwt:
+  secret: SuPeR SeCrEt PhRaSe
+  refresh_life: 6h
+  access_life: 10m5s
+
+cop:
+  disabled: true
+  endpoint: "http://..."
+  upstream: "http://..."
+  service_name: identity-svc
+  service_port: 80

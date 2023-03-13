@@ -1,0 +1,73 @@
+parameters:
+  - name: id
+    in: path
+    description: User identifier
+    required: true
+    schema:
+      type: integer
+
+get:
+  tags:
+    - Users
+  summary: Get User
+  operationId: getUser
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/User'
+              included:
+                type: array
+                items:
+                  type: object
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '404':
+      $ref: '#/components/responses/NotFound'
+    '500':
+      $ref: '#/components/responses/InternalError'
+
+delete:
+  tags:
+    - Users
+  summary: Delete User
+  operationId: deleteUser
+  responses:
+    '204':
+      description: Success
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '404':
+      $ref: '#/components/responses/NotFound'
+    '500':
+      $ref: '#/components/responses/InternalError'
+
+patch:
+  tags:
+    - Users
+  summary: Update User
+  operationId: updateUser
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            data:
+              type: object
+              $ref: '#/components/schemas/User'
+  responses:
+    '204':
+      description: Success
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '404':
+      $ref: '#/components/responses/NotFound'
+    '500':
+      $ref: '#/components/responses/InternalError'

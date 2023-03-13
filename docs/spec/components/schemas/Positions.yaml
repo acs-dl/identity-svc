@@ -1,0 +1,15 @@
+allOf:
+  - $ref: '#/components/schemas/PositionsKey'
+  - type: object
+    required:
+      - attributes
+    properties:
+      attributes:
+        type: object
+        required:
+          - positions
+        properties:
+          positions:
+            type: array
+            items:
+              type: string
