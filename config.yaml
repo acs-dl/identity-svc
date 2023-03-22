@@ -30,6 +30,7 @@ registrator:
   topic: "identity" #MODULE topic
   title: "Identity" #MODULE title
   prefix: ""
+  is_module: false
 
 cop:
   disabled: true
