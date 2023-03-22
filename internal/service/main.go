@@ -5,6 +5,8 @@ import (
 	"net/http"
 
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/config"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/registrator"
 	"gitlab.com/distributed_lab/kit/copus/types"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
@@ -38,6 +40,11 @@ func newService(cfg config.Config) *service {
 }
 
 func Run(cfg config.Config) {
+	regCfg := cfg.Registrator()
+	if err := registrator.RegisterModule(data.ModuleName, regCfg); err != nil {
+		panic(err)
+	}
+
 	if err := newService(cfg).run(); err != nil {
 		panic(err)
 	}

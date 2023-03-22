@@ -1,11 +1,12 @@
 log:
+  level: debug
   disable_sentry: true
 
 db:
-  url: postgres://identity:identity@localhost:5432/identity?sslmode=disable
+  url: postgres://identity:identity@localhost:5482/identity?sslmode=disable
 
 listener:
-  addr: :8000
+  addr: :9005
 
 positions:
   list:
@@ -22,6 +23,13 @@ jwt:
   secret: SuPeR SeCrEt PhRaSe
   refresh_life: 6h
   access_life: 10m5s
+
+registrator:
+  outer_url: "http://localhost:8000/integrations/orchestrator/modules" #endpoint to register MODULE
+  inner_url: "http://localhost:9005/integrations/identity-svc" #endpoint to MODULE itself
+  topic: "identity" #MODULE topic
+  title: "Identity" #MODULE title
+  prefix: ""
 
 cop:
   disabled: true

@@ -16,6 +16,7 @@ type Config interface {
 
 	Positions() []string
 	JwtParams() *JwtCfg
+	Registrator() RegistratorConfig
 }
 
 type config struct {
@@ -27,6 +28,7 @@ type config struct {
 
 	positionsOnce comfig.Once
 	jwtCfg        comfig.Once
+	registrator   comfig.Once
 }
 
 func New(getter kv.Getter) Config {

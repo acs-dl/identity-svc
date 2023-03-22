@@ -1,10 +1,11 @@
 package data
 
 import (
-	"gitlab.com/distributed_lab/acs/identity-svc/resources"
-	"gitlab.com/distributed_lab/kit/pgdb"
 	"net/http"
 	"strconv"
+
+	"gitlab.com/distributed_lab/acs/identity-svc/resources"
+	"gitlab.com/distributed_lab/kit/pgdb"
 
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
@@ -15,6 +16,7 @@ const (
 	pageParamNumber = "page[number]"
 	pageParamCursor = "page[cursor]"
 	pageParamOrder  = "page[order]"
+	ModuleName      = "identity"
 )
 
 // OrderType - represents sorting order of the query
