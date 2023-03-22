@@ -44,7 +44,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.8.1 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
-	gitlab.com/distributed_lab/acs/auth v0.0.0-20230202160032-c779e38da077 // indirect
+	gitlab.com/distributed_lab/acs/auth v0.0.0-20230309115252-2c1f9e1d211a // indirect
 	gitlab.com/distributed_lab/lorem v0.2.0 // indirect
 	gitlab.com/distributed_lab/running v0.0.0-20200706131153-4af0e83eb96c // indirect
 	golang.org/x/crypto v0.4.0 // indirect
