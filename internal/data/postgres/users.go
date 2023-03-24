@@ -82,7 +82,7 @@ func applyUserSelector(sql sq.SelectBuilder, selector data.UserSelector) sq.Sele
 		sql = sql.Where(sq.ILike{positionColumn: "%" + *selector.Position + "%"})
 	}
 	if selector.OffsetParams != nil {
-		sql = selector.OffsetParams.ApplyTo(sql, nameColumn)
+		sql = selector.OffsetParams.ApplyTo(sql, fmt.Sprintf("CONCAT(%s, ' ', %s)", nameColumn, surnameColumn))
 	}
 	if selector.Email != nil {
 		sql = sql.Where(sq.ILike{emailColumn: "%" + *selector.Email + "%"})
