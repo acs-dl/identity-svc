@@ -1,9 +1,12 @@
 package service
 
 import (
+	"context"
+
 	"github.com/go-chi/chi"
 	auth "gitlab.com/distributed_lab/acs/auth/middlewares"
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/data/postgres"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/receiver"
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/handlers"
 	"gitlab.com/distributed_lab/ape"
 )
@@ -12,6 +15,8 @@ func (s *service) router() chi.Router {
 	r := chi.NewRouter()
 
 	secret := s.config.JwtParams().Secret
+
+	receiver.Run(context.Background(), s.config)
 
 	r.Use(
 		ape.RecoverMiddleware(s.log),
@@ -24,8 +29,7 @@ func (s *service) router() chi.Router {
 	)
 	r.Route("/integrations/identity-svc", func(r chi.Router) {
 		r.Get("/user_roles", handlers.GetUserRolesMap) // comes from orchestrator
-		r.Get("/roles", handlers.GetRolesMap)          // comes from orchestrator
-		
+
 		r.Route("/users", func(r chi.Router) {
 			r.With(auth.Jwt(secret, "identity", []string{"read", "write"}...)).
 				Get("/", handlers.GetUsers)

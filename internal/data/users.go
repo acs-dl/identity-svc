@@ -8,6 +8,7 @@ type UsersQ interface {
 	Create(user User) (int64, error)
 	Delete(id int64) error
 	Update(user User) error
+	UpdateTelegram(user User) error
 	GetById(id int64) (*User, error)
 
 	GetTotalCount() (int64, error)
@@ -16,11 +17,12 @@ type UsersQ interface {
 }
 
 type User struct {
-	Id       int64  `db:"id" structs:"-"`
-	Name     string `db:"name" structs:"name"`
-	Surname  string `db:"surname" structs:"surname"`
-	Email    string `db:"email" structs:"email"`
-	Position string `db:"position" structs:"position"`
+	Id       int64   `db:"id" structs:"-"`
+	Name     string  `db:"name" structs:"name"`
+	Surname  string  `db:"surname" structs:"surname"`
+	Email    string  `db:"email" structs:"email"`
+	Telegram *string `db:"telegram" structs:"telegram"`
+	Position string  `db:"position" structs:"position"`
 }
 
 // UserSelector is a structure for all applicable filters and params

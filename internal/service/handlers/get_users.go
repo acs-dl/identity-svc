@@ -74,6 +74,7 @@ func newUserResource(user data.User) resources.User {
 			Position: user.Position,
 			Surname:  user.Surname,
 			Email:    user.Email,
+			Telegram: user.Telegram,
 		},
 	}
 }

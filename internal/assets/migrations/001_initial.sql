@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     name TEXT NOT NULL,
     surname TEXT NOT NULL,
     email TEXT NOT NULL,
+    telegram TEXT,
     position TEXT NOT NULL
 );
 INSERT INTO users (name, surname, email, position) VALUES ('Serhii', 'Pomohaiev', 'serhii.pomohaiev@distributedlab.com', 'GOD');
