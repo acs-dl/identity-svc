@@ -20,5 +20,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Registration in `orchestrator`
 - Requests to send roles 
 
+## [1.0.2] - 2023-03-24
+
+### Added
+
+- `AMQP` connection and created receiver
+- Telegram info in db
+- Updating telegram information dynamically from `telegram-module`
+
+### Changed
+
+- Sorts by name, not by ID 
+
 [1.0.0]: https://gitlab.com/distributed_lab/acs/orchestrator/-/tree/feature/requests_action_filter
 [1.0.0]: https://github.com/distributed_lab/acs/identity-svc/compare/develop...feature/add_registration_roles
