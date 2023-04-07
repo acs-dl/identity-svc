@@ -36,10 +36,9 @@ get:
   parameters:
     - $ref: '#/components/parameters/pageLimitParam'
     - $ref: '#/components/parameters/pageNumberParam'
-    - $ref: '#/components/parameters/UserNameParam'
-    - $ref: '#/components/parameters/UserSurnameParam'
     - $ref: '#/components/parameters/UserPositionParam'
     - $ref: '#/components/parameters/searchParam'
+    - $ref: '#/components/parameters/sortingParam'
   responses:
     '200':
       description: Success

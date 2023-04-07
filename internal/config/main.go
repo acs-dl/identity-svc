@@ -16,6 +16,7 @@ type Config interface {
 
 	Positions() []string
 	JwtParams() *JwtCfg
+	Amqp() *AmqpData
 	Registrator() RegistratorConfig
 }
 
@@ -28,6 +29,7 @@ type config struct {
 
 	positionsOnce comfig.Once
 	jwtCfg        comfig.Once
+	amqp          comfig.Once
 	registrator   comfig.Once
 }
 

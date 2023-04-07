@@ -20,3 +20,5 @@ allOf:
             type: string
           position:
             type: string
+          telegram:
+            type: string

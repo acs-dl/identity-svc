@@ -16,7 +16,6 @@ const (
 	pageParamNumber = "page[number]"
 	pageParamCursor = "page[cursor]"
 	pageParamOrder  = "page[order]"
-	ModuleName      = "identity"
 )
 
 // OrderType - represents sorting order of the query
@@ -30,10 +29,8 @@ const (
 )
 
 const (
-	OrderAscending         = "asc"
-	OrderDescending        = "desc"
-	defaultLimit    uint64 = 15
-	maxLimit        uint64 = 100
+	defaultLimit uint64 = 15
+	maxLimit     uint64 = 100
 )
 
 // Invert - inverts order by
