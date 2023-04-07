@@ -1,7 +1,7 @@
 package models
 
 import (
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/requests"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/api/requests"
 )
 
 type (

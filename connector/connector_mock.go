@@ -2,7 +2,7 @@ package connector
 
 import (
 	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/handlers"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/api/handlers"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 )
 

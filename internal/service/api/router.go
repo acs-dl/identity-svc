@@ -1,13 +1,10 @@
-package service
+package api
 
 import (
-	"context"
-
 	"github.com/go-chi/chi"
 	auth "gitlab.com/distributed_lab/acs/auth/middlewares"
 	"gitlab.com/distributed_lab/acs/identity-svc/internal/data/postgres"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/receiver"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/handlers"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/api/handlers"
 	"gitlab.com/distributed_lab/ape"
 )
 
@@ -15,8 +12,6 @@ func (s *service) router() chi.Router {
 	r := chi.NewRouter()
 
 	secret := s.config.JwtParams().Secret
-
-	receiver.Run(context.Background(), s.config)
 
 	r.Use(
 		ape.RecoverMiddleware(s.log),
