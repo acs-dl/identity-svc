@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
     telegram TEXT,
     position TEXT NOT NULL
 );
-INSERT INTO users (name, surname, email, position) VALUES ('Serhii', 'Pomohaiev', 'serhii.pomohaiev@distributedlab.com', 'GOD');
 
 -- +migrate Down
 
