@@ -25,6 +25,9 @@ func (s *service) router() chi.Router {
 	r.Route("/integrations/identity-svc", func(r chi.Router) {
 		r.Get("/user_roles", handlers.GetUserRolesMap) // comes from orchestrator
 
+		//Delete that comes from orchestrator
+		r.Delete("/orchestrator_users/{id}", handlers.DeleteUser)
+
 		r.Route("/users", func(r chi.Router) {
 			r.With(auth.Jwt(secret, "identity", []string{"read", "write"}...)).
 				Get("/", handlers.GetUsers)
