@@ -1,9 +1,9 @@
 package connector
 
 import (
-	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/api/handlers"
-	"gitlab.com/distributed_lab/acs/identity-svc/resources"
+	"github.com/acs-dl/identity-svc/connector/models"
+	"github.com/acs-dl/identity-svc/internal/service/api/handlers"
+	"github.com/acs-dl/identity-svc/resources"
 )
 
 type ConnectorMockIdentity struct {

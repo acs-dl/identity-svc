@@ -3,8 +3,8 @@ package processor
 import (
 	"strconv"
 
+	"github.com/acs-dl/identity-svc/internal/data"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
 

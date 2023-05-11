@@ -2,11 +2,11 @@ package registrator
 
 import (
 	"context"
+	"gitlab.com/distributed_lab/logan/v3"
 	"time"
 
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/config"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
-	"gitlab.com/distributed_lab/logan/v3"
+	"github.com/acs-dl/identity-svc/internal/config"
+	"github.com/acs-dl/identity-svc/internal/data"
 	"gitlab.com/distributed_lab/running"
 )
 

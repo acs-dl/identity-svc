@@ -2,12 +2,12 @@ package api
 
 import (
 	"context"
+	"gitlab.com/distributed_lab/logan/v3"
 	"net"
 	"net/http"
 
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/config"
+	"github.com/acs-dl/identity-svc/internal/config"
 	"gitlab.com/distributed_lab/kit/copus/types"
-	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
 

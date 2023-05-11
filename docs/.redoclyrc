@@ -1,9 +1,9 @@
 
-apiTitle: identity-svc
+apiTitle: github.com/acs-dl/identity-svc
 splitSpec: true
 codeSamples: false
 swaggerUI: true
 travis: true
-repo: tokend/notifications/notifications-router-svc
+repo: github.com/acs-dl/identity-svc
 oasVersion: 1.0.0
 

@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/cli"
+	"github.com/acs-dl/identity-svc/internal/cli"
 )
 
 func main() {

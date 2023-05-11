@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"gitlab.com/distributed_lab/acs/identity-svc/resources"
+	"github.com/acs-dl/identity-svc/resources"
 	"gitlab.com/distributed_lab/ape"
 )
 

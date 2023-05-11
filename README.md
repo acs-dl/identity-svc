@@ -7,7 +7,7 @@ Identity service for access management service
 ## Install
 
   ```bash
-  git clone gitlab.com/distributed_lab/acs/identity-svc
+  git clone github.com/acs-dl/identity-svc
   cd identity-svc
   go build main.go
   export KV_VIPER_FILE=./config.yaml
@@ -41,8 +41,8 @@ use `docker run ` with `-p 8080:80` to expose port 80 to 8080
 {%_ } _%}
 
     ```bash
-    docker build -t gitlab.com/distributed_lab/acs/identity-svc .
-    docker run -e KV_VIPER_FILE=/config.yaml gitlab.com/distributed_lab/acs/identity-svc
+    docker build -t github.com/acs-dl/identity-svc .
+    docker run -e KV_VIPER_FILE=/config.yaml github.com/acs-dl/identity-svc
     ```
 
 ## Running from Source

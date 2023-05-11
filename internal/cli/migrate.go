@@ -1,9 +1,9 @@
 package cli
 
 import (
+	"github.com/acs-dl/identity-svc/internal/assets"
+	"github.com/acs-dl/identity-svc/internal/config"
 	migrate "github.com/rubenv/sql-migrate"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/assets"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/config"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
 

@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/acs-dl/identity-svc/resources"
 	"github.com/go-chi/chi"
 	"github.com/spf13/cast"
-	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
 

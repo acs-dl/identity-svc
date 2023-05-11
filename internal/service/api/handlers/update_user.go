@@ -3,8 +3,8 @@ package handlers
 import (
 	"net/http"
 
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/api/requests"
+	"github.com/acs-dl/identity-svc/internal/data"
+	"github.com/acs-dl/identity-svc/internal/service/api/requests"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
 )

@@ -3,7 +3,7 @@ package receiver
 import (
 	"context"
 
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/config"
+	"github.com/acs-dl/identity-svc/internal/config"
 )
 
 func Run(ctx context.Context, cfg config.Config) {

@@ -1,10 +1,10 @@
 package api
 
 import (
+	auth "github.com/acs-dl/auth-svc/middlewares"
+	"github.com/acs-dl/identity-svc/internal/data/postgres"
+	"github.com/acs-dl/identity-svc/internal/service/api/handlers"
 	"github.com/go-chi/chi"
-	auth "gitlab.com/distributed_lab/acs/auth/middlewares"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/data/postgres"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/api/handlers"
 	"gitlab.com/distributed_lab/ape"
 )
 

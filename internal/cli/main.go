@@ -1,17 +1,17 @@
 package cli
 
 import (
+	"gitlab.com/distributed_lab/logan/v3"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/acs-dl/identity-svc/internal/config"
+	"github.com/acs-dl/identity-svc/internal/data"
+	"github.com/acs-dl/identity-svc/internal/registrator"
+	"github.com/acs-dl/identity-svc/internal/service"
 	"github.com/alecthomas/kingpin"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/config"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/data"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/registrator"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service"
 	"gitlab.com/distributed_lab/kit/kv"
-	"gitlab.com/distributed_lab/logan/v3"
 )
 
 func Run(args []string) bool {
