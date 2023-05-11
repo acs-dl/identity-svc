@@ -18,6 +18,7 @@ const (
 	surnameColumn  = "surname"
 	positionColumn = "position"
 	emailColumn    = "email"
+	telegramColumn = "telegram"
 )
 
 var selectUsersTable = sq.Select("*").From(usersTable)
@@ -81,7 +82,7 @@ func applyUserSelector(sql sq.SelectBuilder, selector data.UserSelector) sq.Sele
 		sql = sql.Where(sq.ILike{positionColumn: "%" + *selector.Position + "%"})
 	}
 	if selector.OffsetParams != nil {
-		sql = selector.OffsetParams.ApplyTo(sql, idColumn)
+		sql = selector.OffsetParams.ApplyTo(sql, fmt.Sprintf("CONCAT(%s, ' ', %s)", nameColumn, surnameColumn))
 	}
 	if selector.Email != nil {
 		sql = sql.Where(sq.ILike{emailColumn: "%" + *selector.Email + "%"})
@@ -114,7 +115,7 @@ func (q *usersQ) GetById(id int64) (*data.User, error) {
 }
 
 func (q *usersQ) Delete(id int64) error {
-	stmt := sq.Delete(usersTable).Where(sq.Eq{"id": id})
+	stmt := sq.Delete(usersTable).Where(sq.Eq{idColumn: id})
 	err := q.db.Exec(stmt)
 
 	return err
@@ -123,7 +124,23 @@ func (q *usersQ) Delete(id int64) error {
 func (q *usersQ) Update(user data.User) error {
 	clauses := structs.Map(user)
 
-	stmt := sq.Update(usersTable).SetMap(clauses).Where(sq.Eq{"id": user.Id})
+	stmt := sq.Update(usersTable).SetMap(clauses).Where(sq.Eq{idColumn: user.Id})
+	err := q.db.Exec(stmt)
+
+	return err
+}
+
+func (q *usersQ) UpdateTelegram(user data.User) error {
+	stmt := sq.Update(usersTable)
+
+	if user.Telegram == nil {
+		stmt = stmt.Set(telegramColumn, user.Telegram)
+	} else {
+		stmt = stmt.Set(telegramColumn, *user.Telegram)
+	}
+
+	stmt = stmt.Where(sq.Eq{idColumn: user.Id})
+
 	err := q.db.Exec(stmt)
 
 	return err

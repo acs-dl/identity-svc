@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"gitlab.com/distributed_lab/acs/identity-svc/connector/models"
-	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/handlers"
+	"gitlab.com/distributed_lab/acs/identity-svc/internal/service/api/handlers"
 	"gitlab.com/distributed_lab/acs/identity-svc/resources"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"gitlab.com/distributed_lab/urlval"

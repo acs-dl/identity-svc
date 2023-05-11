@@ -1,10 +1,11 @@
 package data
 
 import (
-	"gitlab.com/distributed_lab/acs/identity-svc/resources"
-	"gitlab.com/distributed_lab/kit/pgdb"
 	"net/http"
 	"strconv"
+
+	"gitlab.com/distributed_lab/acs/identity-svc/resources"
+	"gitlab.com/distributed_lab/kit/pgdb"
 
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
@@ -28,10 +29,8 @@ const (
 )
 
 const (
-	OrderAscending         = "asc"
-	OrderDescending        = "desc"
-	defaultLimit    uint64 = 15
-	maxLimit        uint64 = 100
+	defaultLimit uint64 = 15
+	maxLimit     uint64 = 100
 )
 
 // Invert - inverts order by
