@@ -22,7 +22,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		Name:     request.Attributes.Name,
 		Surname:  request.Attributes.Surname,
 		Position: request.Attributes.Position,
-		Email:    request.Attributes.Email,
 	})
 	if err != nil {
 		Log(r).WithError(err).Error("failed to create user")

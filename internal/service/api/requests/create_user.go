@@ -30,6 +30,5 @@ func validate(r resources.User) error {
 		"/data/attributes/name":     validation.Validate(r.Attributes.Name, validation.Required),
 		"/data/attributes/surname":  validation.Validate(r.Attributes.Surname, validation.Required),
 		"/data/attributes/position": validation.Validate(r.Attributes.Position, validation.Required),
-		"/data/attributes/email":    validation.Validate(r.Attributes.Email, validation.Required, validation.Match(emailRegex)),
 	}.Filter()
 }
