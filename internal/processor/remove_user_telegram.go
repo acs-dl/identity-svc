@@ -53,7 +53,7 @@ func (p *processor) parseIdAndGetUser(id string) (*data.User, *int64, error) {
 		return nil, nil, errors.Wrap(err, "failed to get user by id")
 	}
 	if user == nil {
-		return nil, nil, errors.Wrap(err, "no user with such id")
+		return nil, nil, errors.New("no user with such id")
 	}
 
 	return user, &userId, err

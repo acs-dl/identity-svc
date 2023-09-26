@@ -8,6 +8,7 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/acs-dl/identity-svc/internal/data"
 	"github.com/fatih/structs"
+	"github.com/pkg/errors"
 	"gitlab.com/distributed_lab/kit/pgdb"
 )
 
@@ -17,7 +18,6 @@ const (
 	nameColumn     = "name"
 	surnameColumn  = "surname"
 	positionColumn = "position"
-	emailColumn    = "email"
 	telegramColumn = "telegram"
 )
 
@@ -84,9 +84,6 @@ func applyUserSelector(sql sq.SelectBuilder, selector data.UserSelector) sq.Sele
 	if selector.OffsetParams != nil {
 		sql = selector.OffsetParams.ApplyTo(sql, fmt.Sprintf("CONCAT(%s, ' ', %s)", nameColumn, surnameColumn))
 	}
-	if selector.Email != nil {
-		sql = sql.Where(sq.ILike{emailColumn: "%" + *selector.Email + "%"})
-	}
 	if selector.Search != nil {
 		searchModified := strings.Replace(*selector.Search, " ", "%", -1)
 		searchModified = fmt.Sprint("%", searchModified, "%")
@@ -107,7 +104,7 @@ func (q *usersQ) GetById(id int64) (*data.User, error) {
 	var result data.User
 
 	err := q.db.Get(&result, q.sql.Where(sq.Eq{idColumn: id}))
-	if err == sql.ErrNoRows {
+	if errors.Is(err, sql.ErrNoRows) {
 		return nil, nil
 	}
 

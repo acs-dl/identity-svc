@@ -3,14 +3,11 @@ package requests
 import (
 	"encoding/json"
 	"net/http"
-	"regexp"
 
 	"github.com/acs-dl/identity-svc/resources"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
-
-var emailRegex = regexp.MustCompile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
 
 func NewCreateUserRequest(r *http.Request) (resources.User, error) {
 	request := struct {
