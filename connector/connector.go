@@ -101,7 +101,6 @@ func (c *Connector) UpdateUser(request models.UpdateUserParams) error {
 			Name:     request.Name,
 			Position: request.Position,
 			Surname:  request.Surname,
-			Email:    request.Email,
 		},
 	}}
 

@@ -15,7 +15,6 @@ type GetUsersRequest struct {
 	Surname  *string `filter:"surname"`
 	Search   *string `filter:"search"` //search by name and surname not exact matching
 	Position *string `filter:"position"`
-	Email    *string `filter:"email"`
 }
 
 func NewGetUsersRequest(r *http.Request) (GetUsersRequest, error) {

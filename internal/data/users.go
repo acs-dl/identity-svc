@@ -20,7 +20,6 @@ type User struct {
 	Id       int64   `db:"id" structs:"-"`
 	Name     string  `db:"name" structs:"name"`
 	Surname  string  `db:"surname" structs:"surname"`
-	Email    string  `db:"email" structs:"email"`
 	Telegram *string `db:"telegram" structs:"telegram"`
 	Position string  `db:"position" structs:"position"`
 }
@@ -31,6 +30,5 @@ type UserSelector struct {
 	Name         *string
 	Surname      *string
 	Position     *string
-	Email        *string
 	Search       *string
 }

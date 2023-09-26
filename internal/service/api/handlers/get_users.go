@@ -23,7 +23,6 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		Name:         request.Name,
 		Surname:      request.Surname,
 		Position:     request.Position,
-		Email:        request.Email,
 		Search:       request.Search,
 	})
 	if err != nil {
@@ -36,7 +35,6 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		Name:     request.Name,
 		Surname:  request.Surname,
 		Position: request.Position,
-		Email:    request.Email,
 		Search:   request.Search,
 	})
 	if err != nil {
@@ -73,7 +71,6 @@ func newUserResource(user data.User) resources.User {
 			Name:     user.Name,
 			Position: user.Position,
 			Surname:  user.Surname,
-			Email:    user.Email,
 			Telegram: user.Telegram,
 		},
 	}

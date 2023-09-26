@@ -7,7 +7,6 @@ import (
 type (
 	UpdateUserParams struct {
 		Id       int64  `json:"id"`
-		Email    string `json:"email"`
 		Name     string `json:"name"`
 		Position string `json:"position"`
 		Surname  string `json:"surname"`

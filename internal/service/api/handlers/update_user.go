@@ -35,7 +35,6 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		Name:     request.Data.Attributes.Name,
 		Surname:  request.Data.Attributes.Surname,
 		Position: request.Data.Attributes.Position,
-		Email:    request.Data.Attributes.Email,
 	})
 	if err != nil {
 		Log(r).WithError(err).Error("failed to update user")

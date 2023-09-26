@@ -9,14 +9,11 @@ allOf:
         required:
           - name
           - surname
-          - email
           - position
         properties:
           name:
             type: string
           surname:
-            type: string
-          email:
             type: string
           position:
             type: string
