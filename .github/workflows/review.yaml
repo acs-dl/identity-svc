@@ -1,0 +1,39 @@
+name: Code-Review
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+  pull_request:
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.20
+
+      - name: Install Reviewdog
+        run: |
+          echo -e 'runner:
+            \n  golangci-lint:
+            \n    cmd: golangci-lint run
+            \n    errorformat:
+            \n      - "%f:%l:%c: %m"' > reviewdog.yml
+          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b ./bin
+
+      - name: Install GolangCI-Lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.43.0
+
+      - name: Run Reviewdog
+        run: |
+          if [ -f reviewdog.yml ]; then ./bin/reviewdog -reporter=github-pr-check -level=info; fi
