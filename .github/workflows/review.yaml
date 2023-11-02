@@ -16,7 +16,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: golangci-lint
+      - name: Run code review
         uses: reviewdog/action-golangci-lint@v2
         with:
-          golangci_lint_flags: "--enable-all --exclude-use-default=false"
+          level: error
+          fail_on_error: true
