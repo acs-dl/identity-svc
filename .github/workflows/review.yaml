@@ -38,4 +38,4 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ -f reviewdog.yml ]; then  reviewdog -reporter=github-pr-check; fi
+          if [ -f reviewdog.yml ]; then ./bin/reviewdog -reporter=github-pr-check; fi
